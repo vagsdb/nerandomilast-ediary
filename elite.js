@@ -115,8 +115,8 @@
   }
   function trajectorySvg(data){
     if(data.length<2)return `<div class="empty-state">${t('noData')}</div>`;
-    const metrics=[['fvc','#24a79a','FVC'],['dlco','#e1a957','DLCO'],['spo2','#6f8ee8','SpO₂']]; const W=900,H=290,p=38;
-    const points=(key)=>{const vals=data.map((x,i)=>({i,v:+x[key]})).filter(x=>Number.isFinite(x.v)&&x.v>0);if(!vals.length)return'';const min=Math.min(...vals.map(x=>x.v)),max=Math.max(...vals.map(x=>x.v));return vals.map(x=>`${p+x.i*(W-2*p)/Math.max(1,data.length-1)},${H-p-(x.v-min)*(H-2*p)/Math.max(1,max-min)}`).join(' ')};
+    const metrics=[['fvc','#24a79a','FVC'],['dlco','#e1a957','DLCO'],['spo2','#6f8ee8','SpO₂']]; const W=900,H=290,p=38,ceiling=140;
+    const points=(key)=>{const vals=data.map((x,i)=>({i,v:+x[key]})).filter(x=>Number.isFinite(x.v)&&x.v>0);if(!vals.length)return'';return vals.map(x=>`${p+x.i*(W-2*p)/Math.max(1,data.length-1)},${H-p-Math.min(ceiling,x.v)*(H-2*p)/ceiling}`).join(' ')};
     return `<div class="chart-wrap"><svg viewBox="0 0 ${W} ${H}" role="img" aria-label="Clinical trajectory chart"><g class="grid-lines">${[0,1,2,3,4].map(i=>`<line x1="${p}" x2="${W-p}" y1="${p+i*(H-2*p)/4}" y2="${p+i*(H-2*p)/4}"/>`).join('')}</g>${metrics.map(([k,c])=>`<polyline points="${points(k)}" fill="none" stroke="${c}" stroke-width="4" stroke-linecap="round" stroke-linejoin="round"/>`).join('')}${data.map((x,i)=>x.event?`<g transform="translate(${p+i*(W-2*p)/Math.max(1,data.length-1)},22)"><line y1="20" y2="${H-p}" class="event-line"/><circle r="6" fill="#e1a957"><title>${e(x.date+': '+x.event)}</title></circle></g>`:'').join('')}</svg><div class="chart-legend">${metrics.map(([,c,l])=>`<span><i style="background:${c}"></i>${l}</span>`).join('')}<span><i class="event-dot"></i>${t('event')}</span></div></div>`;
   }
 
