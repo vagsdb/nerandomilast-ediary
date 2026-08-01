@@ -7,8 +7,10 @@
   <meta name="description" content="Ημερολόγιο θεραπείας και φαρμακοεπαγρύπνησης με νεραντομιλάστη">
   <title>Ημερολόγιο Νεραντομιλάστης</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="elite.css">
 </head>
 <body>
+  <button id="language-toggle" class="language-toggle" type="button" aria-label="Change language">EN</button>
   <div id="lock" class="lock">
     <div class="lock-card">
       <h2>🫁 Ημερολόγιο Νεραντομιλάστης</h2>
@@ -35,9 +37,25 @@
     <nav id="navigation"></nav>
     <main>
       <section id="dashboard" class="page active">
-        <div class="hero"><h2>Πίνακας παρακολούθησης</h2><p>Συμμόρφωση, ανοχή και εκκρεμότητες φαρμακοεπαγρύπνησης.</p></div>
+        <div class="hero hero-premium"><div><span class="eyebrow">LIVING WITH PULMONARY FIBROSIS</span><h2>Οι πνεύμονές μου σήμερα</h2><p>Μια σύντομη, ουσιαστική εικόνα της θεραπείας και της καθημερινότητάς σας.</p></div><div class="lung-mark" aria-hidden="true">◌</div></div>
+        <div id="quick-cockpit"></div>
         <div id="urgent-alerts"></div><div id="kpis" class="kpis"></div>
         <div class="card"><h3>Πρόσφατες καταγραφές</h3><div id="recent-entries"></div></div>
+      </section>
+
+      <section id="trajectory" class="page">
+        <div class="hero"><span class="eyebrow">SIGNAL, NOT A SINGLE NUMBER</span><h2>Η πορεία μου</h2><p>Λειτουργία πνευμόνων, οξυγόνο, βάρος και κλινικά γεγονότα στην ίδια χρονική γραμμή.</p></div>
+        <div id="trajectory-studio"></div>
+      </section>
+
+      <section id="atlas" class="page">
+        <div class="hero"><span class="eyebrow">UNDERSTAND THE DISEASE</span><h2>Μέσα στους πνεύμονές μου</h2><p>Ένας διαδραστικός άτλαντας για την ίνωση, τις μετρήσεις και τη νεραντομιλάστη.</p></div>
+        <div id="lung-atlas"></div>
+      </section>
+
+      <section id="care" class="page">
+        <div class="hero"><span class="eyebrow">ACT ON CHANGE</span><h2>Πυξίδα θεραπείας</h2><p>Καθοδήγηση για συχνά προβλήματα, νέα φάρμακα και προσωπικούς στόχους.</p></div>
+        <div id="care-compass"></div>
       </section>
 
       <section id="today" class="page">
@@ -95,5 +113,6 @@
   <script src="app.js"></script>
   <script src="profile-enhance.js"></script>
   <script src="summary.js"></script>
+  <script src="elite.js"></script>
 </body>
 </html>
